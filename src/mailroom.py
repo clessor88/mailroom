@@ -13,11 +13,19 @@ def sort_donors(donor_dict):
 # TODO - Create prettify donor_list
 
 
+def get_list(dictionary):
+    """Loop through dictionary and print names."""
+    for key in dictionary:
+        print("{},{}}".format(key[0], key[1]))
+    donor_name(dictionary)
+
+
 def donor_name(dictionary):
     """Get Full Name and Donation Amount."""
-    first_name = input("Please Enter First Name :")
-    last_name = input("Please Enter Last Name :")
-    full_name = (last_name, first_name)
-    amt = input('"Please enter donoation amount :')
-    dictionary.setdeafult(full_name, default=[amt])
-    
+    first_name = input("Please Enter First Name or type list for list of donor:")
+    if first_name.lower() == 'list':
+        get_list(dictionary)
+    else:
+        last_name = input("Please Enter Last Name :")
+        amt = input('"Please enter donoation amount :')
+        dictionary[(last_name, first_name)] = [amt]
