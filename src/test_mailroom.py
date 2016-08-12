@@ -10,5 +10,5 @@ TEST_DICT = {
 def test_sort_donors():
     """Sorts donor outputs from most to least donated"""
     from mailroom import sort_donors
-    result = [('harrison', 'mike'), ('lessor', 'crystal'), ('smith', 'john'), ('python', 'monty')]
+    result = [('harrison', 'mike'), ('lessor', 'crystal'), ('python', 'monty'), ('smith', 'john')]
     assert sort_donors(TEST_DICT) == result
