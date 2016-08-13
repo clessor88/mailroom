@@ -13,8 +13,9 @@ def sort_donors(donor_list):
     new_list = []
     for k in sorted_donors:
         donor_info = "{}: {}: {}".format(k, donor_list[k], float(sum(donor_list[k])) / len(donor_list[k]))
-        new_list.append(donor_info)
-    return new_list
+        new_list.append(donor_list)
+    print(new_list)
+    welcome_prompt()
 
 # TODO - Create prettify donor_list
 
@@ -22,13 +23,13 @@ def sort_donors(donor_list):
 def get_list():
     """Loop through dictionary and print names."""
     for key in donor_list:
-        print("{},{}}".format(key[0], key[1]))
+        print("{},{}".format(key[0], key[1]))
     get_last_name()
 
 
 def get_first_name():
-    first_name = input("Please enter first name or type list for list of donors:")
-    if first_name == first_name.isalpha():
+    first_name = input("Please enter first name:")
+    if first_name.isalpha():
         return first_name
     else:
         print('Please type only letters')
@@ -36,8 +37,8 @@ def get_first_name():
 
 
 def get_last_name():
-    last_name = input("Please enter last name:")
-    if last_name == last_name.isalpha():
+    last_name = input("Please enter last name, or type list for list of donors:")
+    if last_name.isalpha():
         if last_name.lower() == 'list':
             get_list()
         elif last_name.lower() == 'q':
@@ -51,18 +52,21 @@ def get_last_name():
 
 def get_amount():
     amt = input("Please enter donation amount:")
-    if amt == amt.isnumeric():
+    if amt.isnumeric():
         return amt
     else:
         print('Please enter only numbers')
         get_amount()
 
 
+
+
 def add_info_and_email():
-    tmp = {}
-    tmp[(get_last_name(), get_first_name())] = [get_amount()]
-    print("Thank you, {} {}, for your generous donation of {}!".format(list(tmp.keys())[0][0], list(tmp.keys())[0][1], list(tmp.values())[0]))
-    donor_list.update(tmp)
+    last = get_last_name()
+    first = get_first_name()
+    amount = get_amount()
+    donor_list[(last, first)] = [amount]
+    print("Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
 
@@ -71,9 +75,13 @@ def welcome_prompt():
     if choice == '1':
         add_info_and_email()
     elif choice == '2':
-        sort_donors()
+        sort_donors(donor_list)
     elif choice.lower() == 'q':
         return
     else:
         print('Invalid choice, please try again')
         welcome_prompt()
+
+
+if __name__ == "__main__":
+    welcome_prompt()
