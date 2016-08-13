@@ -58,15 +58,22 @@ def get_amount():
         get_amount()
 
 
+def add_info_and_email():
+    tmp = {}
+    tmp[(get_last_name(), get_first_name())] = [get_amount()]
+    print("Thank you, {} {}, for your generous donation of {}!".format(list(tmp.keys())[0][0], list(tmp.keys())[0][1], list(tmp.values())[0]))
+    donor_list.update(tmp)
+    welcome_prompt()
 
 
-# def donor_info(dictionary):
-#    """Get Full Name and Donation Amount."""
-#     first_name = input("Please Enter First Name or type list for list of donor:")
-#     if first_name.lower() == 'list':
-#         get_list(dictionary)
-#     else:
-#         last_name = input("Please Enter Last Name :")
-#         amt = input('"Please enter donoation amount :')
-#         int(amt)
-#         dictionary[(last_name, first_name)] = [amt]
+def welcome_prompt():
+    choice = input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
+    if choice == '1':
+        add_info_and_email()
+    elif choice == '2':
+        sort_donors()
+    elif choice.lower() == 'q':
+        return
+    else:
+        print('Invalid choice, please try again')
+        welcome_prompt()
