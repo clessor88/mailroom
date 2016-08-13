@@ -1,31 +1,72 @@
 # -*- coding: utf-8 -*-
+donor_list = {
+    ('lessor', 'crystal'): [10, 40, 25],
+    ('harrison', 'mike'): [30, 40, 15],
+    ('smith', 'john'): [10, 25],
+    ('python', 'monty'): [42]
+}
 
 
-def sort_donors(donor_dict):
+def sort_donors(donor_list):
     """Turn donors into list and sorts in decending order."""
-    sorted_donors = sorted(donor_dict, key=lambda x: sum(donor_dict[x]), reverse=True)
+    sorted_donors = sorted(donor_list, key=lambda x: sum(donor_list[x]), reverse=True)
     new_list = []
     for k in sorted_donors:
-        donor_info = "{}: {}: {}".format(k, donor_dict[k], float(sum(donor_dict[k])) / len(donor_dict[k]))
+        donor_info = "{}: {}: {}".format(k, donor_list[k], float(sum(donor_list[k])) / len(donor_list[k]))
         new_list.append(donor_info)
     return new_list
 
 # TODO - Create prettify donor_list
 
 
-def get_list(dictionary):
+def get_list():
     """Loop through dictionary and print names."""
-    for key in dictionary:
+    for key in donor_list:
         print("{},{}}".format(key[0], key[1]))
-    donor_name(dictionary)
+    get_last_name()
 
 
-def donor_name(dictionary):
-    """Get Full Name and Donation Amount."""
-    first_name = input("Please Enter First Name or type list for list of donor:")
-    if first_name.lower() == 'list':
-        get_list(dictionary)
+def get_first_name():
+    first_name = input("Please enter first name or type list for list of donors:")
+    if first_name == first_name.isalpha():
+        return first_name
     else:
-        last_name = input("Please Enter Last Name :")
-        amt = input('"Please enter donoation amount :')
-        dictionary[(last_name, first_name)] = [amt]
+        print('Please type only letters')
+        get_first_name()
+
+
+def get_last_name():
+    last_name = input("Please enter last name:")
+    if last_name == last_name.isalpha():
+        if last_name.lower() == 'list':
+            get_list()
+        elif last_name.lower() == 'q':
+            welcome_prompt()
+        else:
+            return last_name
+    else:
+        print('Please type only letters')
+        get_last_name()
+
+
+def get_amount():
+    amt = input("Please enter donation amount:")
+    if amt == amt.isnumeric():
+        return amt
+    else:
+        print('Please enter only numbers')
+        get_amount()
+
+
+
+
+# def donor_info(dictionary):
+#    """Get Full Name and Donation Amount."""
+#     first_name = input("Please Enter First Name or type list for list of donor:")
+#     if first_name.lower() == 'list':
+#         get_list(dictionary)
+#     else:
+#         last_name = input("Please Enter Last Name :")
+#         amt = input('"Please enter donoation amount :')
+#         int(amt)
+#         dictionary[(last_name, first_name)] = [amt]
