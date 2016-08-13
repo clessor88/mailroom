@@ -13,7 +13,8 @@ def sort_donors(donor_list):
     new_list = []
     for k in sorted_donors:
         donor_info = "{}: {}: {}".format(k, donor_list[k], float(sum(donor_list[k])) / len(donor_list[k]))
-        new_list.append(donor_list)
+        new_list.append(donor_info)
+        print(donor_info)
     print(new_list)
     welcome_prompt()
 
