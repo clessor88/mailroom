@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import print_function
+try:
+    input = raw_input
+except NameError:
+    pass
+
 donor_list = {
     ('lessor', 'crystal'): [10, 40, 25],
     ('harrison', 'mike'): [30, 40, 15],
@@ -39,10 +45,6 @@ def get_list():
 
 def get_first_name():
     """Get first name."""
-    try:
-        input = raw_input
-    except NameError:
-        pass
     first_name = input(u"Please enter first name:")
     return first_name
 
@@ -57,10 +59,6 @@ def validate_first_name(first_name):
 
 
 def get_last_name():
-    try:
-        input = raw_input
-    except NameError:
-        pass
     last_name = input(u"Please enter last name, or type list for list of donors:")
     return last_name
 
@@ -82,10 +80,6 @@ def validate_last_name(last_name):
 
 def get_amount():
     """Get amount of donation."""
-    try:
-        input = raw_input
-    except NameError:
-        pass
     amt = input(u"Please enter donation amount:")
     return amt
 
@@ -103,16 +97,12 @@ def add_info_and_email():
     last = validate_last_name(get_last_name())
     first = validate_first_name(get_first_name())
     amount = validate_amt(get_amount())
-    donor_list[(last, first)] = [int(amount)]
+    donor_list[(last, first)] = amount
     print(u"Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
 
 def welcome_prompt():
-    try:
-        input = raw_input
-    except NameError:
-        pass
     choice = input(u"WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
     if choice == '1' or choice == 1:
         add_info_and_email()
