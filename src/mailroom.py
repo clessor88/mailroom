@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 donor_list = {
     ('lessor', 'crystal'): [10, 40, 25],
     ('harrison', 'mike'): [30, 40, 15],
@@ -30,7 +30,6 @@ def prettyfy(lst):
     welcome_prompt()
 
 
-
 def get_list():
     """Loop through dictionary and print names."""
     for key in donor_list:
@@ -39,16 +38,35 @@ def get_list():
 
 
 def get_first_name():
-    first_name = input("Please enter first name:")
+    """Get first name."""
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    first_name = input(u"Please enter first name:")
+    return first_name
+
+
+def validate_first_name(first_name):
+    """Validate first name."""
     if first_name.isalpha():
         return first_name
     else:
-        print('Please type only letters')
+        print(u'Please type only letters')
         get_first_name()
 
 
 def get_last_name():
-    last_name = input("Please enter last name, or type list for list of donors:")
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    last_name = input(u"Please enter last name, or type list for list of donors:")
+    return last_name
+
+
+def validate_last_name(last_name):
+    """Validate last name to be valid."""
     if last_name.isalpha():
         if last_name.lower() == 'list':
             get_list()
@@ -57,38 +75,53 @@ def get_last_name():
         else:
             return last_name
     else:
-        print('Please type only letters')
+        print(u'Please type only letters')
         get_last_name()
 
 
+
 def get_amount():
-    amt = input("Please enter donation amount:")
-    if amt.isnumeric():
+    """Get amount of donation."""
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    amt = input(u"Please enter donation amount:")
+    return amt
+
+
+def validate_amt(amt):
+    """Validates if amt is a number."""
+    if amt.isdigit():
         return amt
     else:
-        print('Please enter only numbers')
+        print(u'Please enter only numbers')
         get_amount()
 
 
 def add_info_and_email():
-    last = get_last_name()
-    first = get_first_name()
-    amount = get_amount()
+    last = validate_last_name(get_last_name())
+    first = validate_first_name(get_first_name())
+    amount = validate_amt(get_amount())
     donor_list[(last, first)] = [int(amount)]
-    print("Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
+    print(u"Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
 
 def welcome_prompt():
-    choice =input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
-    if choice == '1':
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    choice = input(u"WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
+    if choice == '1' or choice == 1:
         add_info_and_email()
-    elif choice == '2':
+    elif choice == '2' or choice == 2:
         prettyfy(sort_donors(donor_list))
     elif choice == 'q' or choice == 'Q':
         return
     else:
-        print('Invalid choice, please try again')
+        print(u'Invalid choice, please try again')
         welcome_prompt()
 
 
