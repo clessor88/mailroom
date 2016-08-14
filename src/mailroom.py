@@ -87,7 +87,7 @@ def get_amount():
 def validate_amt(amt):
     """Validates if amt is a number."""
     if amt.isdigit():
-        return amt
+        return int(amt)
     else:
         print(u'Please enter only numbers')
         get_amount()
@@ -97,7 +97,7 @@ def add_info_and_email():
     last = validate_last_name(get_last_name())
     first = validate_first_name(get_first_name())
     amount = validate_amt(get_amount())
-    donor_list[(last, first)] = amount
+    donor_list[(last, first)] = [int(amount)]
     print(u"Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
