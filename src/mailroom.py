@@ -16,7 +16,6 @@ def sort_donors(lst):
         avg = float((sum(donor_list[k])) / len(donor_list[k]))
         donor_info = (k, donor_list[k], avg, )
         new_list.append(donor_info)
-    print(new_list)
     return new_list
 
 
@@ -25,7 +24,7 @@ def prettyfy(lst):
     print(('Name' + ' ' * 16)+'||'+('History'+' '*13)+'||'+'Avg Donation') 
     for item in lst:
         name = ("{}, {}".format(item[0][0].capitalize(), item[0][1].capitalize())+" "*10)[:20]
-        history = ((str(item[1]))[1:-2] + (' ' * 40))[:20]
+        history = ((str(item[1]))[1:-1] + (' ' * 40))[:20]
         avg = str(round(float(item[2]), 2))
         print(name + '||' + history + '||' + avg)
     welcome_prompt()
@@ -81,7 +80,7 @@ def add_info_and_email():
 
 
 def welcome_prompt():
-    choice = str(input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:"))
+    choice =input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
     if choice == '1':
         add_info_and_email()
     elif choice == '2':
