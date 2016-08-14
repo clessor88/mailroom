@@ -1,24 +1,35 @@
 # -*- coding: utf-8 -*-
+
 donor_list = {
     ('lessor', 'crystal'): [10, 40, 25],
     ('harrison', 'mike'): [30, 40, 15],
     ('smith', 'john'): [10, 25],
-    ('python', 'monty'): [42]
+    ('python', 'monty'): [42],
 }
 
 
-def sort_donors(donor_list):
+def sort_donors(lst):
     """Turn donors into list and sorts in decending order."""
     sorted_donors = sorted(donor_list, key=lambda x: sum(donor_list[x]), reverse=True)
     new_list = []
     for k in sorted_donors:
-        donor_info = "{}: {}: {}".format(k, donor_list[k], float(sum(donor_list[k])) / len(donor_list[k]))
+        avg = float((sum(donor_list[k])) / len(donor_list[k]))
+        donor_info = (k, donor_list[k], avg, )
         new_list.append(donor_info)
-        print(donor_info)
     print(new_list)
+    return new_list
+
+
+def prettyfy(lst):
+    """"Take a list and print out a petty series of strings."""
+    print(('Name' + ' ' * 16)+'||'+('History'+' '*13)+'||'+'Avg Donation') 
+    for item in lst:
+        name = ("{}, {}".format(item[0][0].capitalize(), item[0][1].capitalize())+" "*10)[:20]
+        history = ((str(item[1]))[1:-2] + (' ' * 40))[:20]
+        avg = str(round(float(item[2]), 2))
+        print(name + '||' + history + '||' + avg)
     welcome_prompt()
 
-# TODO - Create prettify donor_list
 
 
 def get_list():
@@ -60,24 +71,22 @@ def get_amount():
         get_amount()
 
 
-
-
 def add_info_and_email():
     last = get_last_name()
     first = get_first_name()
     amount = get_amount()
-    donor_list[(last, first)] = [amount]
+    donor_list[(last, first)] = [int(amount)]
     print("Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
 
 def welcome_prompt():
-    choice = input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
+    choice = str(input("WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:"))
     if choice == '1':
         add_info_and_email()
     elif choice == '2':
-        sort_donors(donor_list)
-    elif choice.lower() == 'q':
+        prettyfy(sort_donors(donor_list))
+    elif choice == 'q' or choice == 'Q':
         return
     else:
         print('Invalid choice, please try again')
