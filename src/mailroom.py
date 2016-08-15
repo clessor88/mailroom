@@ -27,7 +27,7 @@ def sort_donors(lst):
 
 def prettyfy(lst):
     """"Take a list and print out a petty series of strings."""
-    print(('Name' + ' ' * 16)+'||'+('History'+' '*13)+'||'+'Avg Donation') 
+    print(('Name' + ' ' * 16)+'||'+('History'+' '*13)+'||'+'Avg Donation')
     for item in lst:
         name = ("{}, {}".format(item[0][0].capitalize(), item[0][1].capitalize())+" "*10)[:20]
         history = ((str(item[1]))[1:-1] + (' ' * 40))[:20]
@@ -77,7 +77,6 @@ def validate_last_name(last_name):
         get_last_name()
 
 
-
 def get_amount():
     """Get amount of donation."""
     amt = input(u"Please enter donation amount:")
@@ -97,7 +96,10 @@ def add_info_and_email():
     last = validate_last_name(get_last_name())
     first = validate_first_name(get_first_name())
     amount = validate_amt(get_amount())
-    donor_list[(last, first)] = [int(amount)]
+    if (last, first) in donor_list:
+        donor_list[(last, first)].append(amount)
+    else:
+        donor_list.setdefault((last, first), [amount])
     print(u"Thank you, {} {}, for your generous donation of {}!".format(first, last, amount))
     welcome_prompt()
 
