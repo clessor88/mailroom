@@ -95,4 +95,6 @@ Scripts/
 pip-selfcheck.json
 share/
 tcl/
+bin/
+pyvenv.cfg
 tox.ini
