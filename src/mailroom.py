@@ -40,13 +40,12 @@ def get_list():
     """Loop through dictionary and print names."""
     for key in donor_list:
         print("{},{}".format(key[0], key[1]))
-    get_last_name()
+    return validate_last_name(get_last_name())
 
 
 def get_first_name():
     """Get first name."""
-    first_name = input(u"Please enter first name:")
-    return first_name
+    return input(u"Please enter first name:")
 
 
 def validate_first_name(first_name):
@@ -55,44 +54,44 @@ def validate_first_name(first_name):
         return first_name
     else:
         print(u'Please type only letters')
-        get_first_name()
+        return validate_first_name(get_first_name())
 
 
 def get_last_name():
-    last_name = input(u"Please enter last name, or type list for list of donors:")
-    return last_name
+    """Get Last name from input."""
+    return input(u"Please enter last name, or type list for list of donors:")
 
 
 def validate_last_name(last_name):
     """Validate last name to be valid."""
     if last_name.isalpha():
         if last_name.lower() == 'list':
-            get_list()
+            return get_list()
         elif last_name.lower() == 'q':
-            welcome_prompt()
+            return welcome_prompt()
         else:
             return last_name
     else:
         print(u'Please type only letters')
-        get_last_name()
+        return validate_last_name(get_last_name())
 
 
 def get_amount():
     """Get amount of donation."""
-    amt = input(u"Please enter donation amount:")
-    return amt
+    return input(u"Please enter donation amount:")
 
 
 def validate_amt(amt):
-    """Validates if amt is a number."""
+    """Validate if amt is a number."""
     if amt.isdigit():
         return int(amt)
     else:
         print(u'Please enter only numbers')
-        get_amount()
+        return validate_amt(get_amount())
 
 
 def add_info_and_email():
+    """Call gets funcs and validates them. Add to dict and print."""
     last = validate_last_name(get_last_name())
     first = validate_first_name(get_first_name())
     amount = validate_amt(get_amount())
@@ -105,6 +104,7 @@ def add_info_and_email():
 
 
 def welcome_prompt():
+    """Begining welcome prmpt."""
     choice = input(u"WELCOME! Press 1 to send a thank you, press 2 to view report, or 'q' to return to beginning:")
     if choice == '1' or choice == 1:
         add_info_and_email()
